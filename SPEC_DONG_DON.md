@@ -302,7 +302,7 @@ interface Order {
 
 ---
 
-## 6. HƯỚNG DẪN MỞ RỘNG (FUTURE ENHANCEMENTS)
+## 6. HƯỚNG DẪN MỞ RỘNG (FUTURE ENHANCEMENTS) ( 🩶 LÀM SAU )
 
 1. **Tích hợp Barcode / QR Scanner:** Hỗ trợ lắng nghe sự kiện từ máy quét mã vạch USB/Bluetooth trên ô `search-input` để tự động lọc và mở popup đơn ngay khi quét mã vận đơn.
 2. **WebSocket Realtime Updates:** Khi có đơn mới được chuyển sang trạng thái "Đã nhặt xong", tự động cập nhật số liệu trên thẻ `#pending-total` và chèn thẻ đơn mới vào đầu danh sách với hiệu ứng nhấp nháy (highlight fade).
