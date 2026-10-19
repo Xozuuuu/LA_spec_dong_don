@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111419">
+  <title>Kho vận — Đóng đơn</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-mark">K</div>
+      <div class="brand-copy"><strong>Kho vận</strong><span>Vận hành đơn hàng</span></div>
+      <div class="top-actions"><span class="online-dot"></span><span class="desktop-label">Đang hoạt động</span><button
+          class="icon-btn" id="notifications" aria-label="Thông báo">♧</button><button class="avatar"
+          id="profile">HH</button></div>
+    </header>
+
+    <main class="page">
+      <div class="breadcrumbs"><span>Kho vận</span><span>›</span><strong id="breadcrumb-current">Đóng đơn</strong></div>
+      <section class="page-heading">
+        <div>
+          <h1 id="page-title">Đóng đơn</h1>
+          <p class="subheading" id="page-subtitle">Theo dõi và xử lý các đơn hàng đang chờ đóng.</p>
+        </div>
+        <button class="btn btn-secondary" id="refresh-btn">↻ <span>Làm mới</span></button>
+      </section>
+
+      <div class="success-banner"><span class="checkmark">✓</span><span>Đã chấm công VÀO lúc <b>08:21</b> · RA
+          <b>18:22</b></span></div>
+      <section class="summary-grid">
+        <article class="summary-card">
+          <span class="summary-icon blue">▤</span>
+          <div class="summary-texts">
+            <span class="muted">Đơn cần xử lý</span>
+            <small>Đang chờ đóng</small>
+          </div>
+          <strong class="summary-num" id="pending-total">06</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-icon green">✓</span>
+          <div class="summary-texts">
+            <span class="muted">Đã hoàn thành <span class="desktop-only">hôm nay</span></span>
+            <small class="positive">Hoạt động tốt</small>
+          </div>
+          <strong class="summary-num">141</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-icon orange">◷</span>
+          <div class="summary-texts">
+            <span class="muted">Đơn cần lưu ý</span>
+            <small class="warning-text">Kho đang xử lý</small>
+          </div>
+          <strong class="summary-num">26</strong>
+        </article>
+      </section>
+
+      <div class="alert-banner"><span class="alert-symbol">!</span>
+        <div class="alert-copy"><strong>26 đơn đã hủy sau khi Kho vào đóng</strong>
+          <p>Vui lòng kiểm tra lại trạng thái trước khi tiếp tục xử lý.</p>
+        </div><button class="btn btn-alert" id="view-alerts">Xem chi tiết ↗</button>
+      </div>
+
+      <div class="sticky-controls">
+        <nav class="tabs" aria-label="Trạng thái đơn">
+          <button class="tab active" data-status="waiting">◉ Chờ đóng <span class="count">6</span></button>
+          <button class="tab" data-status="done">✓ Xong hôm nay <span class="count">141</span></button>
+          <button class="tab" data-status="mine">▣ Đơn của tôi <span class="count">1</span></button>
+        </nav>
+
+        <section class="filter-panel">
+          <label class="search-box"><span class="search-icon">⌕</span><input id="search-input" type="search"
+              placeholder="Mã đơn, mã vận đơn, khách hàng..." autocomplete="off"></label>
+          <div class="filter-row">
+            <div class="carrier-chips" aria-label="Lọc hãng vận chuyển">
+              <button class="chip selected" data-carrier="all">Tất cả <b>(10)</b></button>
+              <button class="chip" data-carrier="ghtk">GHTK <b>(2)</b></button>
+              <button class="chip" data-carrier="bookship">Bookship · Gửi xe <b>(6)</b></button>
+              <button class="chip" data-carrier="spx">SPX <b>(1)</b></button>
+              <button class="chip" data-carrier="vtp">VTP <b>(1)</b></button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="orders-header">
+        <div>
+          <h2 id="list-title">Chưa ai đóng · đơn bookship</h2>
+          <p>Chạm vào thẻ để xem chi tiết hoặc dùng nút hành động để tiếp tục.</p>
+        </div><span class="result-count" id="result-count">3 đơn hiển thị</span>
+      </section>
+      <section id="order-list" class="order-list" aria-live="polite"></section>
+      <section id="empty-state" class="empty-state hidden"><span class="empty-icon">⌕</span><strong>Không tìm thấy đơn
+          hàng</strong>
+        <p>Thử thay đổi từ khóa hoặc bộ lọc.</p><button class="btn btn-secondary" id="clear-filters">Xóa bộ lọc</button>
+      </section>
+    </main>
+
+    <footer class="bottom-nav">
+      <button class="nav-item active" data-page="Kho vận"><span>⬡</span>Kho vận</button>
+      <button class="nav-item" data-page="Công việc"><span>▣</span>Công việc</button>
+      <button class="nav-item" data-page="Nhân sự"><span>♙</span>Nhân sự</button>
+      <button class="nav-item" data-page="Thông báo"><span>♧</span>Thông báo</button>
+      <button class="nav-item" data-page="Khác"><span>☰</span>Khác</button>
+    </footer>
+  </div>
+
+  <dialog id="order-dialog" class="order-dialog">
+    <div class="dialog-top">
+      <div><span class="eyebrow">CHI TIẾT ĐƠN HÀNG</span>
+        <h2 id="dialog-title">Thông tin đơn</h2>
+      </div><button class="icon-btn" id="close-dialog" aria-label="Đóng">✕</button>
+    </div>
+    <div id="dialog-content"></div>
+    <div class="dialog-actions"><button class="btn btn-secondary" id="back-dialog">Quay lại</button><button
+        class="btn btn-primary" id="dialog-primary">Bắt đầu đóng</button></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+
+</html>
